@@ -114,11 +114,13 @@ public class JMSTopicBrowser implements MessageListener {
     }
 
     public static void main(String[] args) throws Exception {
+        String url = "t3://apics.oracle.com:8001";
         if (args.length != 1) {
-            System.out.println("Usage: java JMSTopicBrowser WebLogicURL");
-            return;
+            System.out.println("WebLogic URL not provided, using " + url);
+        } else {
+            url = args[0];
         }
-        InitialContext ic = getInitialContext(args[0]);
+        InitialContext ic = getInitialContext(url);
 
         JMSTopicBrowser tb = new JMSTopicBrowser();
         tb.init(ic, TOPIC);
